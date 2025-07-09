@@ -1,0 +1,75 @@
+@import "tailwindcss";
+/* === Global Reset === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Arial', sans-serif;
+  overflow-x: hidden;
+  background-color: #0c0f1a; /* Dark background to match the theme */
+  color: #f0f4f8; /* Light text for contrast */
+}
+
+/* Optional smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Paragraphs */
+p {
+  color: #cbd5e1;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #00bfff;
+  text-shadow: 0 0 5px #00bfff;
+}
+
+/* Buttons */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+/* Remove input styles */
+input, textarea {
+  font-family: inherit;
+  border: none;
+  outline: none;
+}
+
+/* Make sure images don’t overflow */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Utility */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+

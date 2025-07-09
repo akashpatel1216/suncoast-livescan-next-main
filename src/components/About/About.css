@@ -1,0 +1,457 @@
+/* About Section Styles */
+.about-section {
+    position: relative;
+    padding: 120px 0;
+    background-color: white;
+    overflow: hidden;
+  }
+  
+  /* Background Elements */
+  .about-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+  }
+  
+  .about-grid-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+    background-size: 25px 25px;
+    opacity: 0.6;
+  }
+  
+  .about-blur-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+  }
+  
+  .about-circle-1 {
+    top: -200px;
+    left: -100px;
+    width: 500px;
+    height: 500px;
+    background: rgba(59, 130, 246, 0.07);
+  }
+  
+  .about-circle-2 {
+    bottom: -250px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: rgba(79, 70, 229, 0.05);
+  }
+  
+  /* Main Container */
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .about-content-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+  }
+  
+  /* Images Section */
+  .about-image-container {
+    flex: 0 0 45%;
+    position: relative;
+  }
+  
+  .about-image-group {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .about-image {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  }
+  
+  .about-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .about-image-main {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    aspect-ratio: 4/5;
+  }
+  
+  .about-image-accent {
+    position: absolute;
+    top: 60%;
+    right: -10%;
+    width: 50%;
+    aspect-ratio: 1/1;
+    z-index: 3;
+    border: 6px solid white;
+  }
+  
+  .about-image-pattern {
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    width: 140px;
+    height: 140px;
+    background-color: rgba(59, 130, 246, 0.1);
+    border-radius: 16px;
+    z-index: 1;
+    transform: rotate(-10deg);
+  }
+  
+  .about-image-dots {
+    position: absolute;
+    bottom: 10%;
+    left: -40px;
+    width: 80px;
+    height: 80px;
+    z-index: 1;
+    background-image: radial-gradient(#3b82f6 2px, transparent 2px);
+    background-size: 12px 12px;
+  }
+  
+  /* Experience Badge */
+  .experience-badge {
+    position: absolute;
+    top: 30px;
+    right: -30px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    z-index: 4;
+  }
+  
+  .experience-years {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+    background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .experience-text {
+    font-size: 0.85rem;
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #e2e8f0;
+  }
+  
+  /* Content Section */
+  .about-content {
+    flex: 0 0 47%;
+  }
+  
+  .about-subtitle {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #3b82f6;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  
+  .about-subtitle::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: #3b82f6;
+    border-radius: 3px;
+  }
+  
+  .about-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #0f172a;
+    margin-bottom: 1.5rem;
+  }
+  
+  .about-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #64748b;
+    margin-bottom: 2rem;
+  }
+  
+  /* Features */
+  .about-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .about-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .about-feature-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background-color: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3b82f6;
+  }
+  
+  .about-feature-content h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.5rem;
+  }
+  
+  .about-feature-content p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #64748b;
+  }
+  
+  /* Call to Action */
+  .about-cta {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .about-btn {
+    padding: 0.875rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    display: inline-block;
+    text-align: center;
+  }
+  
+  .about-btn.primary {
+    background-color: #3b82f6;
+    color: white;
+  }
+  
+  .about-btn.primary:hover {
+    background-color: #2563eb;
+    box-shadow: 0 8px 12px rgba(59, 130, 246, 0.2);
+  }
+  
+  .about-btn.secondary {
+    background-color: #f1f5f9;
+    color: #0f172a;
+  }
+  
+  .about-btn.secondary:hover {
+    background-color: #e2e8f0;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 1100px) {
+    .about-title {
+      font-size: 2.2rem;
+    }
+    
+    .about-content-wrapper {
+      gap: 60px;
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .about-section {
+      padding: 100px 0;
+    }
+    
+    .about-content-wrapper {
+      flex-direction: column;
+      gap: 60px;
+    }
+    
+    .about-image-container, .about-content {
+      flex: 0 0 100%;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .about-image-main {
+      width: 85%;
+    }
+    
+    .experience-badge {
+      top: 20px;
+      right: 10px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .about-section {
+      padding: 80px 0;
+    }
+    
+    .about-title {
+      font-size: 2rem;
+    }
+    
+    .about-description {
+      font-size: 1rem;
+    }
+    
+    .about-image-accent {
+      top: 65%;
+      right: -5%;
+      width: 45%;
+    }
+    
+    .experience-badge {
+      padding: 1rem;
+      right: 0;
+    }
+    
+    .experience-years {
+      font-size: 2rem;
+    }
+    
+    .experience-text {
+      font-size: 0.75rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .about-section {
+      padding: 60px 0;
+    }
+    
+    .about-title {
+      font-size: 1.75rem;
+    }
+    
+    .about-subtitle {
+      font-size: 0.9rem;
+    }
+    
+    .about-feature {
+      align-items: flex-start;
+    }
+    
+    .about-feature-icon {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .about-feature-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .about-feature-content h3 {
+      font-size: 1rem;
+    }
+    
+    .about-feature-content p {
+      font-size: 0.9rem;
+    }
+    
+    .about-cta {
+      flex-direction: column;
+    }
+    
+    .about-btn {
+      width: 100%;
+    }
+    
+    .experience-badge {
+      top: 10px;
+      right: 0;
+    }
+    
+    .about-image-pattern {
+      width: 100px;
+      height: 100px;
+      top: -20px;
+      left: -20px;
+    }
+    
+    .about-image-dots {
+      width: 60px;
+      height: 60px;
+      left: -25px;
+    }
+  }
+  
+  /* Animation Enhancements */
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  .experience-badge {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes pulsate {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+  }
+  
+  .about-blur-circle {
+    animation: pulsate 8s infinite ease-in-out;
+  }
+  
+  .about-circle-2 {
+    animation-delay: 2s;
+  }
