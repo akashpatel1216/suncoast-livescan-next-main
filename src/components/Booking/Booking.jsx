@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
-import { supabase } from '../../lib/supabaseClient';
+import { getSupabaseBrowser } from '@@/lib/supabaseClient';
 import './Booking.css';
 import pricing from '../../data/pricing.json';
 
@@ -35,11 +35,9 @@ const Booking = ({ service, onClose }) => {
   const helcimTest = process.env.NEXT_PUBLIC_HELCIM_TEST || '1'; // '1' for sandbox, '0' for live
   const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '';
   const captchaEnabled = false; // Helcim captcha disabled in settings
-  const envAmount = process.env.NEXT_PUBLIC_BOOKING_PRICE ? parseFloat(process.env.NEXT_PUBLIC_BOOKING_PRICE) : undefined;
-
-  // Price (configurable via env, defaults to service-specific pricing if available, else 65.00 USD)
+  // Price: use original service pricing mapping (fallback to 65.00 USD)
   const mappedPrice = pricing?.[service.code] ?? undefined;
-  const priceAmount = Number.isFinite(envAmount) ? envAmount : (Number.isFinite(mappedPrice) ? mappedPrice : 65.0);
+  const priceAmount = Number.isFinite(mappedPrice) ? mappedPrice : 65.0;
 
   // Refs for Helcim.js form inputs
   const cardNumberRef = useRef(null);
@@ -127,7 +125,7 @@ const Booking = ({ service, onClose }) => {
         const nextDay = new Date(startOfDay);
         nextDay.setDate(startOfDay.getDate() + 1);
 
-        const { data, error } = await supabase
+        const { data, error } = await getSupabaseBrowser()
           .from('booked_slots')
           .select('start_at, end_at, status')
           .eq('status', 'confirmed')
