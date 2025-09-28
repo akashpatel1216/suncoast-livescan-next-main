@@ -1,0 +1,439 @@
+.services-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Arial', sans-serif;
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.services-header h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.services-subtitle {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.services-highlight {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin: 2rem 0;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.services-highlight p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.service-card {
+  background: white;
+  border: 1px solid #e1e8ed;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: #3498db;
+}
+
+.service-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.service-header h3 {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  margin: 0;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.service-category {
+  background: #ecf0f1;
+  color: #34495e;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-left: 1rem;
+}
+
+.service-description {
+  color: #7f8c8d;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.book-now-btn {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+  .book-now-btn:hover {
+    background: linear-gradient(135deg, #c0392b, #a93226);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+  }
+
+  /* Modal Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+  }
+
+  .modal-content {
+    background: white;
+    border-radius: 15px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #e1e8ed;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border-radius: 15px 15px 0 0;
+  }
+
+  .modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: white;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+
+  .close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .modal-body {
+    padding: 2rem;
+  }
+
+  .modal-description {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .ahca-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+
+  .ahca-service-item {
+    background: #f8f9fa;
+    border: 1px solid #e1e8ed;
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+
+  .ahca-service-item:hover {
+    background: white;
+    border-color: #3498db;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
+  }
+
+  .ahca-service-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+  }
+
+  .ahca-code {
+    font-weight: 700;
+    color: #2c3e50;
+    font-size: 0.9rem;
+    font-family: 'Courier New', monospace;
+  }
+
+  .ahca-title {
+    color: #7f8c8d;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .ahca-book-btn {
+    background: linear-gradient(135deg, #27ae60, #229954);
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    margin-left: 1rem;
+  }
+
+  .ahca-book-btn:hover {
+    background: linear-gradient(135deg, #229954, #1e8449);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+  }
+
+  /* Modal Responsive Design */
+  @media (max-width: 768px) {
+    .modal-content {
+      max-width: 95vw;
+      margin: 1rem;
+    }
+    
+    .modal-header {
+      padding: 1rem 1.5rem;
+    }
+    
+    .modal-header h2 {
+      font-size: 1.3rem;
+    }
+    
+    .modal-body {
+      padding: 1.5rem;
+    }
+    
+    .ahca-services-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .ahca-service-item {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+    
+    .ahca-book-btn {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+
+.services-info {
+  background: #f8f9fa;
+  padding: 3rem;
+  border-radius: 15px;
+  margin-top: 2rem;
+}
+
+.info-section {
+  margin-bottom: 3rem;
+}
+
+.info-section:last-child {
+  margin-bottom: 0;
+}
+
+.info-section h2 {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.benefit-item {
+  text-align: center;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-item h4 {
+  color: #3498db;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.benefit-item p {
+  color: #7f8c8d;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.additional-services ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.additional-services li {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  color: #2c3e50;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+.additional-services li::before {
+  content: '✓';
+  position: absolute;
+  left: 1rem;
+  color: #27ae60;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .services-container {
+    padding: 1rem;
+  }
+  
+  .services-header h1 {
+    font-size: 2rem;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .service-card {
+    padding: 1.25rem;
+  }
+  
+  .service-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .service-category {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+  
+  .services-info {
+    padding: 2rem 1.5rem;
+  }
+  
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .additional-services ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .services-subtitle {
+    font-size: 1rem;
+  }
+  
+  .service-card {
+    padding: 1rem;
+  }
+  
+  .book-now-btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.85rem;
+  }
+}

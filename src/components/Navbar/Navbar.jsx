@@ -25,7 +25,7 @@ const Navbar = () => {
   // Handle active link based on scroll position
   useEffect(() => {
     const handleActiveLink = () => {
-      const sections = ['home', 'solutions', 'about', 'testimonials', 'contact'];
+      const sections = ['home', 'solutions', 'services', 'about', 'testimonials', 'contact'];
       
       const scrollPosition = window.scrollY + 100;
       
@@ -83,6 +83,13 @@ const Navbar = () => {
             onClick={() => handleLinkClick('solutions')}
           >
             Solutions
+          </a>
+          <a 
+            href="#services" 
+            className={`nav-item ${activeLink === 'services' ? 'active' : ''}`}
+            onClick={() => handleLinkClick('services')}
+          >
+            Services
           </a>
           <a 
             href="#about" 
