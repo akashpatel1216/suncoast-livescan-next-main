@@ -12,9 +12,9 @@ export async function POST(request) {
     }
 
     // Send exactly these fields only
-    const payload = {
+        const payload = {
       paymentType: body.paymentType,
-      amount: body.amount,
+          amount: body.amount,
       currency: body.currency,
     };
     

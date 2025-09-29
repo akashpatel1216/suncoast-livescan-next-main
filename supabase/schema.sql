@@ -22,6 +22,7 @@ create table if not exists public.booked_slots (
   start_at timestamptz not null,
   end_at timestamptz not null,
   ori_code text,
+  location text not null default 'Tampa',
   status text not null default 'confirmed', -- 'held' | 'confirmed'
   created_at timestamptz not null default now(),
   constraint start_before_end check (end_at > start_at)
@@ -29,9 +30,14 @@ create table if not exists public.booked_slots (
 
 -- Prevent overlapping bookings for any active slot
 do $$ begin
+  -- Recreate exclusion constraint to be per-location
+  begin
+    alter table public.booked_slots drop constraint if exists booked_slots_no_overlap;
+  exception when others then null; end;
   alter table public.booked_slots
     add constraint booked_slots_no_overlap
     exclude using gist (
+      location with =,
       tstzrange(start_at, end_at, '[)') with &&
     );
 exception when duplicate_object then null; end $$;
@@ -46,6 +52,7 @@ create table if not exists public.upcoming_appointments (
   customer_id uuid not null references public.customers(id) on delete cascade,
   service_name text,
   ori_code text,
+  location text not null default 'Tampa',
   payment_done boolean not null default false,
   notes text,
   created_at timestamptz not null default now()

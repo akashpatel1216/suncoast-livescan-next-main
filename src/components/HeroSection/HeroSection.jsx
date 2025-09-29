@@ -6,13 +6,13 @@ import Head from 'next/head'; // Import Head for meta tags if using Next.js
 
 const HeroSection = () => {
   // Define your location - can be passed as props from parent component
-  const location = "Tampa, Florida";
+  const location = "Tampa and Tarpon Springs, Florida";
   
   return (
     <>
       {/* SEO Meta Tags - Include if using Next.js */}
       <Head>
-        <title>Professional Live Scan Fingerprinting & Background Checks | Tampa, FL</title>
+        <title>Professional Live Scan Fingerprinting & Background Checks | Tampa and Tarpon Springs, FL</title>
         <meta 
           name="description" 
           content="Secure identity verification through professional fingerprinting, background checks, and biometric services in Wesley Chapel. DOJ certified with fast results. Schedule today!" 
@@ -122,12 +122,12 @@ const HeroSection = () => {
                 Explore Services
               </motion.a>
               <motion.a 
-                href="#appointment" 
+                href="#services" 
                 className="hero-btn secondary"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Schedule Appointment
+                Schedule Services
               </motion.a>
             </div>
             

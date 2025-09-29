@@ -107,10 +107,10 @@ const Navbar = () => {
           </a>
         </nav>
 
-        <button className="cta-button">
+        <a href="#services" className="cta-button">
           Get Started
           <i className="cta-icon">→</i>
-        </button>
+        </a>
       </div>
     </header>
   );

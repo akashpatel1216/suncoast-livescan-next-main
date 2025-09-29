@@ -10,6 +10,7 @@ export async function POST(request) {
       endISO,
       serviceName,
       oriCode,
+      location = 'Tampa',
       customer, // { firstName, lastName, email, phone }
       notes,
     } = body || {};
@@ -55,6 +56,7 @@ export async function POST(request) {
         start_at: new Date(startISO).toISOString(),
         end_at: new Date(endISO).toISOString(),
         ori_code: oriCode || null,
+        location,
         status: 'held',
       })
       .select('id, start_at, end_at, status')
@@ -75,6 +77,7 @@ export async function POST(request) {
           customer_id: customerId,
           service_name: serviceName || null,
           ori_code: oriCode || null,
+          location,
           payment_done: false,
           notes: notes || null,
         })

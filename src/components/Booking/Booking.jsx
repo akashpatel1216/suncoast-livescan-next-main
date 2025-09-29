@@ -7,6 +7,7 @@ import pricing from '../../data/pricing.json';
 const Booking = ({ service, onClose }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
+  const [location, setLocation] = useState('Tampa'); // Tampa | Tarpon Springs
   const [appointmentDetails, setAppointmentDetails] = useState({
     firstName: '',
     lastName: '',
@@ -35,9 +36,10 @@ const Booking = ({ service, onClose }) => {
   const helcimTest = process.env.NEXT_PUBLIC_HELCIM_TEST || '1'; // '1' for sandbox, '0' for live
   const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '';
   const captchaEnabled = false; // Helcim captcha disabled in settings
-  // Price: use original service pricing mapping (fallback to 65.00 USD)
+  // Price: allow env override (for testing) else use original mapping (fallback to 65.00 USD)
+  const envAmount = process.env.NEXT_PUBLIC_BOOKING_PRICE ? parseFloat(process.env.NEXT_PUBLIC_BOOKING_PRICE) : undefined;
   const mappedPrice = pricing?.[service.code] ?? undefined;
-  const priceAmount = Number.isFinite(mappedPrice) ? mappedPrice : 65.0;
+  const priceAmount = Number.isFinite(envAmount) ? envAmount : (Number.isFinite(mappedPrice) ? mappedPrice : 65.0);
 
   // Refs for Helcim.js form inputs
   const cardNumberRef = useRef(null);
@@ -87,9 +89,18 @@ const Booking = ({ service, onClose }) => {
     for (let i = 0; i < 30; i++) {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
-      
-      // Skip Sundays (closed)
-      if (date.getDay() !== 0) {
+      const dow = date.getDay(); // 0=Sun .. 6=Sat
+      // Filter days based on location operating days
+      let openDay = false;
+      if (location === 'Tampa') {
+        // Mon-Fri only
+        openDay = dow >= 1 && dow <= 5;
+      } else if (location === 'Tarpon Springs') {
+        // Sat-Sun only
+        openDay = dow === 0 || dow === 6;
+      }
+
+      if (openDay) {
         days.push({
           date: date,
           day: date.getDate(),
@@ -103,12 +114,36 @@ const Booking = ({ service, onClose }) => {
     return days;
   };
 
-  // Available time slots
-  const timeSlots = [
-    '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
-    '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM',
-    '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM'
-  ];
+  // Generate time slots by location and day
+  const generateTimeSlots = () => {
+    const slots = [];
+    if (!selectedDate) return slots;
+    const day = selectedDate.getDay(); // 0=Sun..6=Sat
+    if (location === 'Tampa') {
+      // Mon-Fri 8:30–5:00 (30-min increments)
+      if (day >= 1 && day <= 5) {
+        addSlots(slots, 8, 30, 17, 0); // 08:30 to 17:00
+      }
+    } else if (location === 'Tarpon Springs') {
+      // Sat-Sun 9:00–2:00 (30-min increments)
+      if (day === 0 || day === 6) {
+        addSlots(slots, 9, 0, 14, 0); // 09:00 to 14:00
+      }
+    }
+    return slots;
+  };
+
+  function addSlots(out, startHour, startMin, endHour, endMin) {
+    const start = new Date(selectedDate);
+    start.setHours(startHour, startMin, 0, 0);
+    const end = new Date(selectedDate);
+    end.setHours(endHour, endMin, 0, 0);
+    const stepMs = 30 * 60 * 1000;
+    for (let t = start.getTime(); t < end.getTime(); t += stepMs) {
+      const label = new Date(t).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      out.push(label);
+    }
+  }
 
   const handleDateSelect = (date) => {
     setSelectedDate(date);
@@ -127,8 +162,9 @@ const Booking = ({ service, onClose }) => {
 
         const { data, error } = await getSupabaseBrowser()
           .from('booked_slots')
-          .select('start_at, end_at, status')
+          .select('start_at, end_at, status, location')
           .eq('status', 'confirmed')
+          .eq('location', location)
           .gte('start_at', startOfDay.toISOString())
           .lt('start_at', nextDay.toISOString());
 
@@ -141,7 +177,7 @@ const Booking = ({ service, onClose }) => {
         const booked = Array.isArray(data) ? data : [];
         const blocked = [];
 
-        for (const t of timeSlots) {
+        for (const t of generateTimeSlots()) {
           const { startISO, endISO } = getSelectedSlotISO(selectedDate, t);
           const slotStart = new Date(startISO).getTime();
           const slotEnd = new Date(endISO).getTime();
@@ -162,7 +198,7 @@ const Booking = ({ service, onClose }) => {
 
     fetchBookedForDay();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedDate]);
+  }, [selectedDate, location]);
 
   const handleTimeSelect = async (time) => {
     if (isRedirecting) return; // prevent stacking if already redirecting
@@ -435,7 +471,8 @@ const Booking = ({ service, onClose }) => {
     if (period === 'AM' && hour24 === 12) hour24 = 0;
     startDate.setHours(hour24, parseInt(minutes, 10), 0, 0);
     const endDate = new Date(startDate);
-    endDate.setHours(hour24 + 1, parseInt(minutes, 10), 0, 0);
+    // 30-minute session
+    endDate.setMinutes(endDate.getMinutes() + 30);
     return { startISO: startDate.toISOString(), endISO: endDate.toISOString() };
   }
 
@@ -443,8 +480,15 @@ const Booking = ({ service, onClose }) => {
 
   const renderStep1 = () => (
     <div className="booking-step">
-      <h3>Select Date</h3>
-      <p>Choose your preferred date for the appointment</p>
+      <h3>Select Location & Date</h3>
+      <p>Choose your location first, then pick a date we are open</p>
+      <div className="form-group">
+        <label>Location</label>
+        <select value={location} onChange={(e) => { setLocation(e.target.value); setSelectedDate(null); setSelectedTime(null); }}>
+          <option>Tampa</option>
+          <option>Tarpon Springs</option>
+        </select>
+      </div>
       <div className="calendar-grid">
         {generateCalendarDays().map((day, index) => (
           <div
@@ -466,7 +510,7 @@ const Booking = ({ service, onClose }) => {
       <h3>Select Time</h3>
       <p>Available time slots for {selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
       <div className="time-slots">
-        {timeSlots.map((time, index) => (
+        {generateTimeSlots().map((time, index) => (
           <button
             key={index}
             className="time-slot"
@@ -531,6 +575,7 @@ const Booking = ({ service, onClose }) => {
         <h4>Appointment Summary</h4>
         <p><strong>Service:</strong> {service.title}</p>
         <p><strong>ORI Code:</strong> {service.code}</p>
+        <p><strong>Location:</strong> {location}</p>
         <p><strong>Date:</strong> {selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
         <p><strong>Time:</strong> {selectedTime}</p>
         <p><strong>Amount:</strong> ${priceAmount.toFixed(2)} USD</p>
@@ -665,6 +710,7 @@ const Booking = ({ service, onClose }) => {
                   endISO,
                   serviceName: service.title,
                   oriCode: service.code,
+                  location,
                   customer: {
                     firstName: appointmentDetails.firstName,
                     lastName: appointmentDetails.lastName,
